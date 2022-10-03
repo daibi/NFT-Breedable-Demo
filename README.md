@@ -60,7 +60,7 @@ Gene 0 NFT Minting process need to check the following prerequisities:
 
 ### 3.3 Gene 0 NFT metadata generation
 
-Gene 0 NFT metadata is a randomly generated gene series, which depends on the random generated from Chainlink. The "real" minting process happens in the callback function listening to successful random number generation in chainlink.
+Gene 0 NFT metadata is a randomly generated gene series, which depends on the random number generated from Chainlink. The "real" minting process happens in the callback function listening to the successful random number generation event from chainlink.
 
 For Gene 0 NFT, two parts of metadata need to be genearted from the random number result (Denoted as R):
 
@@ -75,9 +75,9 @@ For Gene 0 NFT, two parts of metadata need to be genearted from the random numbe
 
 ### 3.4 NFT  breeding: combine parents' gene series
 
-As for the breeding process, we need to consider two parts of gene combination, the color and the "Eight Trigrams sign"; and the beautiful part: mutation.
+As for the breeding process, we need to consider two parts of gene combination, the color and the "Eight Trigrams sign"; and the most beautiful part: mutation.
 
-During NFT breeding, we will use each hex digit of generated random number to act as a flag that if mutation happen in this part. Below is the digit position that decides if certain mutation happens:
+During NFT breeding, we will employ each hex digit of generated random number to act as a flag that if mutation happen in this part. Below is the digit position that decides if certain mutation happens:
 
 Say if we have received a random number from Chainlink, we employ the following digit to determine the mutation phenomena:
 
