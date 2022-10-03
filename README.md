@@ -56,7 +56,7 @@ Here, we will use its basic element -- "bar" to make combination and mutation ha
 
 Gene 0 NFT Minting process need to check the following prerequisities: 
 * Minting switch status is open or not
-* (Potentail): check if minting address is in whitelist
+* (Potentail): check if minting address is in the whitelist
 
 ### 3.3 Gene 0 NFT metadata generation
 
