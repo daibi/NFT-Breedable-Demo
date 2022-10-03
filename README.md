@@ -60,7 +60,7 @@ Gene 0 NFT Minting process need to check the following prerequisities:
 
 ### 3.3 Gene 0 NFT metadata generation
 
-Gene 0 NFT metadata is a randomly generated gene series, which depends on the random generated from chainlink. The "real" minting process happens in the callback function listening to successful random number generation in chainlink.
+Gene 0 NFT metadata is a randomly generated gene series, which depends on the random generated from Chainlink. The "real" minting process happens in the callback function listening to successful random number generation in chainlink.
 
 For Gene 0 NFT, two parts of metadata need to be genearted from the random number result (Denoted as R):
 
