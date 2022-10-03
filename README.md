@@ -40,7 +40,7 @@ Absolutely, we cannot have all calculations on chain because of the cost for on-
 
 For this project, I had a hard time to figure out a representation of gene that can freely combine with each other while still make sense in its metadata set. Fortunately, I found the following elements that may fit with the situation. They are: 
 
-* A png formatted legendary creature: Baihu
+* A png formatted file for filling color 
 * Hex code color for this png file: Hex code color is a six-hex-code representation of color, which can combine on the byte level to generate new color representation
 * Eight Trigrams：Of course there are eight basic signs. Our ancestors have expanded the system to 64 high-level signs to represent different situations for mankind's life. Following  picture demostrates a possible combination of basic signs, and we will use the expanded signs as part of gene series.
 
