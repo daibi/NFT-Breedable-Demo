@@ -4,7 +4,7 @@
 
 This is a repository for an NFT collection with basic breeding ability. It will allow two different and no-related NFT elements combine with each other to generate a new descendant NFT, and this new NFT can inherit parents' gene while can have a relatively small chance to mutate some parts of it.
 
-To fulfill some randomness in the inheritance, we need to figure out a way two freely choose parents' gene series(NFT's Metadata), combine with each other and sometimes use mutation; but still make sure that the gene result on their child still make sense in the NFT metadata set. To make this happen in a fairly low cost, we choose the following features as metadata:
+To fulfill some randomness in the inheritance, we need to figure out a way that two freely chosen parents' gene series(NFT's Metadata), combine with each other and sometimes with mutation, but still make sure that the gene result in their child still make sense in the NFT metadata set. To make this happen in a fairly low cost, we choose the following features as metadata:
 
 * Hex code color
 * the Eight Trigrams(which can combine with each other to make different "signs")
