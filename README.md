@@ -46,7 +46,7 @@ For this project, I had a hard time to figure out a representation of gene that 
 
 ![bagua combination](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/bagua_combination.png?raw=true)
 
-Here, we will use its basic element -- "bar" to make combination and mutation happen. When parents' are breeding, we will need to choose child's bar from parents' bar on the same position. Below illustrates a possible gene selection for child's sign (red bar means it being chosin in child's gene series, green means mutation happens at this position during the breeding process):
+Here, we will use its basic element -- "bar" to make combination and mutation happen. When parents' are breeding, we will need to choose child's bar from parents' bar on the same position. Below illustrates a possible gene selection for child's sign (red bar means it being chosin in child's gene series, while green means mutation happens at this position during the breeding process):
 
 ![bagua combination2](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/bagua_combination2.png?raw=true)
 
