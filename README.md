@@ -50,7 +50,7 @@ Here, we will use its basic element -- "bar" to make combination and mutation ha
 
 ![bagua combination2](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/bagua_combination2.png?raw=true)
 
-💡 We have a bonus feature here. Those signs also represents a basic element in China's ancient mindset, called Wuxing, which includes "Metal", "Wood", "Water", "Fire", "Earth". They have a cycle for reinforcement and counteraction, a potential metadata for Gamefi applications.
+💡 We have a bonus feature here. Those signs also represents a basic element in Chinese ancient mindset, called Wuxing, which includes "Metal", "Wood", "Water", "Fire", "Earth". They have a cycle for reinforcement and counteraction, a potential metadata for Gamefi applications.
 
 ### 3.2 Gene 0 NFT Minting Prerequisites
 
