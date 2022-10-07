@@ -16,6 +16,8 @@ To fulfill some randomness in the inheritance, we need to figure out a way that 
 
 MetaMask developer doc: https://docs.metamask.io/guide/ethereum-provider.html
 
+UI reference: https://www.element.market/collections/rainbowfoustling
+
 ### 2.2 Sequence Diagrams
 Absolutely, we cannot have all calculations on chain because of the cost for on-chain activities. Therefore, we need to seperate some of functionalities to front-end. Below are sequence diagrams, which will provide a walk through for the follwing features:
 
