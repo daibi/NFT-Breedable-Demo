@@ -29,6 +29,23 @@ Absolutely, we cannot have all calculations on chain because of the cost for on-
 
 ![Frontend page render](https://raw.githubusercontent.com/daibi/NFT-Breedable-Demo/fddbc9dcc23aa92b715b12a7f79aa58174e014c2/pics/NFT_front_end_page_render.svg)
 
+an example json message: 
+
+``` JSON
+{
+ "color": "0FFFFF",
+ "eightTrigramSign": "111111"
+}
+```
+
+Where "111111" means: 
+
+![qian](https://bkimg.cdn.bcebos.com/pic/a1ec08fa513d2697d5ea98cc54fbb2fb4316d862?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5/format,f_auto)
+
+and "000000" means:
+
+![kun](https://bkimg.cdn.bcebos.com/pic/c2fdfc039245d688d1824f8ca5c27d1ed21b2411?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_jpg)
+
 #### 2.2.2 Gene 0 NFT Minting
 
 ![Gene 0 Minting](https://raw.githubusercontent.com/daibi/NFT-Breedable-Demo/d5623ff04eb25b6480dd07d18c82caf42cf8831d/pics/gene0_Minting.svg)
