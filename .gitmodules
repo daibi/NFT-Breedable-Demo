@@ -1,0 +1,3 @@
+[submodule "web3-next-demo"]
+	path = web3-next-demo
+	url = https://github.com/daibi/web3-next-demo
