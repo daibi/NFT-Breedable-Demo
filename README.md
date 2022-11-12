@@ -1,105 +1,172 @@
 # NFT-Breedable-Demo
 
+## 0 Get Started
+
+Prerequisites: 
+* npm
+* Ganache, truffle
+* pinata 
+
+### 0.1 Set up a local blockchain environment
+
+After you have set up your local blockchain environment, `cd` into the `truffle-project` repository and run the following instructions:
+
+```bash
+npm install
+truffle compile
+truffle migrate
+```
+
+Then, you will see a smart contract called `EightTrigramCore` deployed in your local blockchain environment.
+
+### 0.2 Prepare front-end `.env.local` file
+
+This project is based on nextJS and has some config variable from the `.env.local` file(not exist in this repository). Therefore, to run this demo locally, you need the following variables config in your local-created `.env.local` file(sits in `./web3-next-demo/.env.local`): 
+
+```
+// Contract address
+CONTRACT_ADDRESS 
+// api key used for pinata(ipfs server) picture saving
+PINATA_API_KEY
+// api secret used for pinata picture saving
+PINATA_API_SECRET
+// net address for your local blockchain environment
+BLOCKCHAIN_NET_ADDRESS
+
+// Contract address used for front-end
+NEXT_PUBLIC_CONTRACT_ADDRESS
+```
+
+
 ## 1 Overview
 
 This is a repository for an NFT collection with basic breeding ability. It will allow two different and no-related NFT elements combine with each other to generate a new descendant NFT, and this new NFT can inherit parents' gene while can have a relatively small chance to mutate some parts of it.
 
-To fulfill some randomness in the inheritance, we need to figure out a way that two freely chosen parents' gene series(NFT's Metadata), combine with each other and sometimes with mutation, but still make sure that the gene result in their child still make sense in the NFT metadata set. To make this happen in a fairly low cost, we choose the following features as metadata:
+To fulfill some randomness in the inheritance, we need to figure out a way two freely choose parents' gene series(NFT's Metadata), combining with each other and sometimes with some mutation; but still make sure that the gene result on their child still makes sense in the NFT metadata set. To make this happen in a fairly low cost, we choose the following features as metadata:
 
-* Hex code color
+* Hex code color in a limited palette(To make sure that color selections are suitable)
+
 * the Eight Trigrams(which can combine with each other to make different "signs")
+
+* the Eight Trigrams, each NFT has the following features:
+
+    * Each NFT has eight positions waiting for 'lighting up'
+
+    * Gene-0 NFT is inited with one position lighted up with a randomly-generated Chinese-zodiac sitting in the central of picture
+
+    * To light up a new position, it is highly recommended to find another NFT with the desired position lighted, but a mutation is possible during the breeding process.
+
+Below is an example of how those NFTs looks like:
+
+![NFT breedable demo](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/NFTbreeding.png?raw=true)
 
 ## 2 Overall System Design
 ### 2.1 Module Structure
 
+### 2.1.1 original Version
 ![NFT Breedable Module Structure](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/module_structure.png?raw=true)
 
-MetaMask developer doc: https://docs.metamask.io/guide/ethereum-provider.html
+### 2.1.2 New Version
 
-UI reference: https://www.element.market/collections/rainbowfoustling
+![NFT Breedable Module Sturcture New Version](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/NFT_breedable_new_module_structure.png?raw=true)
+
+### 2.1.3 Differences
+
+In the new version, we introduce a NodeJs back-end server to solve computational and translating tasks and reassign some "READ" methods to backend to relieve front-end's computational overhead. 
+
+Therefore, back-end server is now in charge of the following features:
+
+* Read smart-contracts state via certain parametes. (i.e: address, NFT tokenId)
+
+* Generate image via the random number input, and save the generated image to pinata ipfs server
+
+And for the front-end, it only focuses on the "WRITE" method on smart contract, while interact with back-end to retrieve data for presentation.
+
 
 ### 2.2 Sequence Diagrams
-Absolutely, we cannot have all calculations on chain because of the cost for on-chain activities. Therefore, we need to seperate some of functionalities to front-end. Below are sequence diagrams, which will provide a walk through for the follwing features:
+Absolutely, we cannot have all calculations on chain because of the cost for on-chain activities. Therefore, we need to seperate some of functionalities to front-end. Below are sequence diagrams, which will provide a walk through the follwing functionalities:
 
 * NFT front-end page render
+
 * Gene 0 NFT minting
+
 * NFT breeding
 
-💡 **Red words** are steps that need further illustration, and we will have a further discussion in the following chapters
 
 #### 2.2.1 NFT front-end page render
 
-![Frontend page render](https://raw.githubusercontent.com/daibi/NFT-Breedable-Demo/fddbc9dcc23aa92b715b12a7f79aa58174e014c2/pics/NFT_front_end_page_render.svg)
+![Frontend page render](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/NFT_front_end_page_render.png?raw=true)
 
-an example json message: 
-
-``` JSON
-{
- "color": "0FFFFF",
- "eightTrigramSign": "111111"
-}
-```
-
-Where "111111" means: 
-
-![qian](https://bkimg.cdn.bcebos.com/pic/a1ec08fa513d2697d5ea98cc54fbb2fb4316d862?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5/format,f_auto)
-
-and "000000" means:
-
-![kun](https://bkimg.cdn.bcebos.com/pic/c2fdfc039245d688d1824f8ca5c27d1ed21b2411?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_jpg)
+**Edit note:** In the former version, we chose to generate the image via Canvas in the front-end page. For the concern of front-end performance, we have moved this part to backend and generate picture based on the metada provided and save it to ipfs server with a url representation of this image instead. 
 
 #### 2.2.2 Gene 0 NFT Minting
 
-![Gene 0 Minting](https://raw.githubusercontent.com/daibi/NFT-Breedable-Demo/d5623ff04eb25b6480dd07d18c82caf42cf8831d/pics/gene0_Minting.svg)
+![Gene 0 Minting](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/gene0_NFT_minting.png?raw=true)
 
 #### 2.2.3 NFT Breeding
 
-![NFT breeding](https://raw.githubusercontent.com/daibi/NFT-Breedable-Demo/8974dab6868f3f63e1c4580f596b03db34c7fd50/pics/NFT_breeding.svg)
+![NFT breeding](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/NFT_breeding.png?raw=true)
 
 ## 3 Detailed Process Demostration
 ### 3.1 Elements for Picture
 
 For this project, I had a hard time to figure out a representation of gene that can freely combine with each other while still make sense in its metadata set. Fortunately, I found the following elements that may fit with the situation. They are: 
 
-* A .png formatted picture file for filling color 
-* Hex code color for this png file: Hex code color is a six-hex-code representation of color, which can combine on the byte level to generate new color representation
-* Eight Trigrams：Of course there are eight basic signs. Our ancestors have expanded the system to 64 high-level signs to represent different situations for mankind's life. Following  picture demostrates a possible combination of basic signs, and we will use the expanded signs as part of gene series.
+* A png - formatted Chinese Zodiac with an eight-trigram surrounded:
+* A hex code color palette for lighting up each "trigram sign": 
+  * Hex code color is a six-hex-code representation of color, which can combine on the byte level to generate new color representation
+* Eight Trigrams：Of course there are eight basic signs. Our ancestors have expanded the system to 64 high-level signs to represent different situations for mankind's life. 
 
-![bagua combination](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/bagua_combination.png?raw=true)
+Below is an example of a gene-0 NFT, with seven signs not lighted and one sign being lighted up with gradually changing color: 
 
-Here, we will use its basic element -- "bar" to make combination and mutation happen. When parents' are breeding, we will need to choose child's bar from parents' bar on the same position. Below illustrates a possible gene selection for child's sign (red bar means it being chosin in child's gene series, while green means mutation happens at this position during the breeding process):
-
-![bagua combination2](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/bagua_combination2.png?raw=true)
-
-💡 We have a bonus feature here. Those signs also represents a basic element in Chinese ancient mindset, called Wuxing, which includes "Metal", "Wood", "Water", "Fire", "Earth". They have a cycle for reinforcement and counteraction, a potential metadata for Gamefi applications.
+![gene0 NFT](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/gene0NFT.png?raw=true)
 
 ### 3.2 Gene 0 NFT Minting Prerequisites
 
 Gene 0 NFT Minting process need to check the following prerequisities: 
 * Minting switch status is open or not
-* (Potentail): check if minting address is in the whitelist
+* check if minting address is in whitelist
 
 ### 3.3 Gene 0 NFT metadata generation
 
-Gene 0 NFT metadata is a randomly generated gene series, which depends on the random number generated from Chainlink. The "real" minting process happens in the callback function listening to the successful random number generation event from chainlink.
+Gene 0 NFT metadata is a randomly generated gene series, which depends on the random number generated from chainlink. 
+
+NOTE: For easier implementation, we use random number generated at front-end and use the random number from chainlink in further iterations.
 
 For Gene 0 NFT, two parts of metadata need to be genearted from the random number result (Denoted as R):
 
-* Hex code color: Hex code color code has six hex digits, each digit is generated via the following process:
-  * First:  R mod 16
-  * Second: (R  + 2 * First)  mod 16
-  * Third: First - 0x2
-  * Fourth: (R  - 2 * Third)  mod 16
-  * Fifth: (R  + Fourth)  mod 16
-  * Sixth:  (R  + 3 * Fifth)  mod 16
+* Based on the given eight-trigram picture, each trigram has fixed position. Therefore, the trigram sign generated by the input random number has a fixed place to "light up". And we need to light up the position with gradually changing colors.
+
 * Eight Trigrams sign generation: a "sign" is composed with 6 "bars", and a "bar" has two variations, which can be viewed as a binary representation. Therefore, we will use the binary representation of the random number and pick last 6 bit as the result of "sign" generation.
 
-### 3.4 NFT  breeding: combine parents' gene series
+* Hex code "from" color: Hex code color code has six hex digits, we use a size-6 color palette to select a color for lighting up :
 
-As for the breeding process, we need to consider two parts of gene combination, the color and the "Eight Trigrams sign"; and the most beautiful part: mutation.
+* Hex code "to" color: same as the from color based on the random number rightly shifted by 3 digit
 
-During NFT breeding, we will employ each hex digit of generated random number to act as a flag that if mutation happen in this part. Below is the digit position that decides if certain mutation happens:
+```javascript
+const colorPalette = [
+  'FEAFDC',
+  'C5C6FE',
+  'FED0B6',
+  'FAE97A',
+  '83FFC0',
+  '80B1FE',
+]
+const colorGeneGeneratedFrom = colorPalette[randomNumber % 6]
+let colorGeneGeneratedTo = colorPalette[Math.abs(randomNumber >> 3) % 6]
+// if from-color and to-color are the same, change the to-color
+if (colorGeneGeneratedFrom === colorGeneGeneratedTo) {
+ 	colorGeneGeneratedTo = colorPalette[((randomNumber % 6) + 3) % 6]
+}
+```
 
-Say if we have received a random number from Chainlink, we employ the following digit to determine the mutation phenomena:
+### 3.4 NFT breeding: combine parents' gene series
 
-![mutation control](https://github.com/daibi/NFT-Breedable-Demo/blob/main/pics/mutation_control.png?raw=true)
+As for the breeding process, we need to consider two parts of gene combination, the color and the "Eight Trigrams sign"; and the beautiful part: mutation.
+
+During NFT breeding, we choose the two NFT that the current address has operational priviledge. And use mother's NFT metadata as a "base", and check if father's lighted position has not been lighted on mothers' metadata, which has a decreasing chance (starting from 50%) of being inherited on their child's metadata. 
+
+We have mentioned how two NFTs are combined, and we will post it here again to have a favor of how this breeding happens.
+
+
+![mutation control](https://github.com/daibi/NFT-Breedable-Demo/blob/demo-init/pics/NFTbreeding.png?raw=true)
